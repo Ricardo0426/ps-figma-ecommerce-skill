@@ -1,5 +1,16 @@
 # Change log
 
+## 2026-11-16
+
+Added reusable lessons from the PS→Figma fidelity repair and paused handoff:
+
+- Route fidelity repairs to a focused reference covering transformed text sizes/leading, visible glyph bounds, alpha offsets, and gradient text.
+- Separate original Smart Object content from PS-rendered display assets; preserve clipping dependencies and avoid destructive dewhite extraction or blind artboard/group state changes.
+- Explain visible clipping bases, baked blend/opacity effects, PS-relative stacking, and clone/reparent geometry readback.
+- Scope before/after comparisons and pixel metrics to their actual revision and targets; distinguish raster fills from editable vectors.
+- Add pause/archive handling that follows the user's copy/export/checking scope, preserves unsaved-state limitations, and does not equate diagnostics with a complete Figma backup.
+- Keep project-specific paths, IDs, counts, fonts, and unvalidated repair scripts out of reusable defaults.
+
 ## 2026-11-15
 
 Updated guidance from the V10 Pro Russian ecommerce/Figma project:
