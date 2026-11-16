@@ -10,6 +10,12 @@
 
 不用于纯前端代码实现，或没有 PS/Figma 需求的普通生图。
 
+## 2026-11-16 更新
+
+补入 PS→Figma 还原精修与暂停交接经验：实际字号/行距、透明素材偏移、剪贴基底与混合、蒙版层序、克隆定位及对照证据范围。详见 [还原偏差修复参考](./ps-figma-ecommerce/references/ps-figma-fidelity.md)；暂停归档流程见 [交付与交接参考](./ps-figma-ecommerce/references/delivery-and-xlsx.md)。
+
+技能源码与根目录 ZIP 下载包已同步更新；原有多语言排版、智能对象取源和 Excel/WPS 回填流程保留。
+
 ## 目录结构
 
 ```
@@ -20,8 +26,9 @@ ps-figma-ecommerce/
 ├── references/
 │   ├── photoshop-native-assets.md   # PSD/PSB 素材提取（嵌套智能对象、矢量导出）
 │   ├── figma-editing.md             # Figma 新建/局部修订、恢复版式、超时恢复
+│   ├── ps-figma-fidelity.md          # PS 还原精修：文字变换、透明度、剪贴合成及对照
 │   ├── backgrounds.md               # 场景/光轨生成、清晰度和跨图变化
-│   ├── delivery-and-xlsx.md         # 原尺寸导出、逐图检查、需求表插图与回填
+│   ├── delivery-and-xlsx.md         # 原尺寸导出、需求表插图/回填及暂停交接
 │   └── project-contract.md          # 交付索引与素材索引的字段约定
 └── scripts/
     ├── check_delivery.py            # 交付图与需求表的一致性检查
