@@ -1,5 +1,7 @@
 # Photoshop 原生素材：从完整源内容提取
 
+修复已有 PS→Figma 还原偏差时，同时阅读 [ps-figma-fidelity.md](ps-figma-fidelity.md)。原始智能对象与按 PS 效果合成的显示资产用途不同，透明边距也可能承载源位置。
+
 ## 连接与定位
 
 发现当前 Photoshop 工具并阅读 schema。典型能力是 `photoshop_ping`、`photoshop_get_state`、`photoshop_list_documents`、`photoshop_get_layers`、`photoshop_get_preview` 和必要时 `photoshop_execute_script`；具体名/参数以当前工具为准。
@@ -16,9 +18,9 @@
 1. 在Photoshop图层面板选中智能对象，使用 **图层 > 智能对象 > 导出内容（Export Contents）**，导出独立`.ai`文件。Photoshop会按嵌入内容的原始格式保存；不要把整张PS画板导出PNG并将其误标为原始矢量。
 2. 如需查看或编辑源内容，使用 **图层 > 智能对象 > 编辑内容（Edit Contents）**；Photoshop会按嵌入智能对象的格式交给相应应用，真实`.ai`源通常在Illustrator中打开。仅提取时无需保存；编辑并保存可能更新父PSD/PSB里的智能对象，因此先保留独立AI副本。
 3. Photoshop没有每个智能对象各自选择“打开方式”的下拉项。若从资源管理器打开`.ai`时启动了Acrobat或其他程序，可在Windows **设置 > 应用 > 默认应用**中按文件类型找到`.ai`，指定Adobe Illustrator。更改后用一份副本实际测试一次 Photoshop 的“编辑内容”，不要仅凭文件关联设置就假定嵌入对象的路由已生效。
-3. 为Figma交付，从Illustrator用 **文件 > 导出 > 导出为 > SVG**。只有当目标就是Illustrator画板边界时才选“使用画板”；否则先核对真实矢量外接框，避免切掉画板外的主体。SVG字体选项若设为轮廓，可保持字形但文字不再可编辑；需要可改文案时保留可兼容的文字或在Figma另建TEXT。
-4. SVG导入Figma会转换为可编辑矢量层，但Illustrator专属效果、嵌入的位图、复杂滤镜、混合和字体仍须逐图检查。不要假定`.ai`的全部分层、滤镜和文字状态都一比一变成Figma原生对象。
-5. 保留AI原件作母版，Figma SVG作为显示/编辑派生文件。分别记录源文件、目标画板/视口、SVG导出设置、实际像素/矢量边界和核对结果；用Figma预览与AI目标外观对照后再交付。
+4. 为Figma交付，从Illustrator用 **文件 > 导出 > 导出为 > SVG**。只有当目标就是Illustrator画板边界时才选“使用画板”；否则先核对真实矢量外接框，避免切掉画板外的主体。SVG字体选项若设为轮廓，可保持字形但文字不再可编辑；需要可改文案时保留可兼容的文字或在Figma另建TEXT。
+5. SVG导入Figma会转换为可编辑矢量层，但Illustrator专属效果、嵌入的位图、复杂滤镜、混合和字体仍须逐图检查。不要假定`.ai`的全部分层、滤镜和文字状态都一比一变成Figma原生对象。
+6. 保留AI原件作母版，Figma SVG作为显示/编辑派生文件。分别记录源文件、目标画板/视口、SVG导出设置、实际像素/矢量边界和核对结果；用Figma预览与AI目标外观对照后再交付。
 
 ## 判断“模糊/主体不全”的来源
 
@@ -35,7 +37,7 @@
 ## 导出规范
 
 - 识别嵌入文件的真实类型并使用正确扩展名交给Photoshop打开；不能将WebP、PDF兼容AI等内容随意改后缀来导出。导出原始完整内容的 PNG/RGBA。透明背景来自原素材，不承诺任何图片天然透明。
-- 分开保留 `native` 和 `display/derived`。默认只裁透明边距，并记录 alpha bbox。大量空房间/桌下环境可在派生图去除，但完整轮圈、底座、双夹、安装结构等相关主体必须保留。
+- 分开保留 `native` 和 `display/derived`。独立主体提取默认只裁透明边距，并记录 alpha bbox；精确还原源位置时保留原导出矩形，或用记录的裁切偏移补偿位置。大量空房间/桌下环境可在派生图去除，但完整轮圈、底座、双夹、安装结构等相关主体必须保留。
 - 不拉伸。完整主体放进视口时计算：
 
 ```text
